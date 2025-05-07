@@ -8,6 +8,10 @@ import 'conections_page.dart';
 import '../pages/settings_page.dart';
 import '../core/services/auth/auth_service.dart';
 import '../utils/app_routes.dart';
+import 'home_page.dart';
+import 'sell_page.dart';
+import 'sells_page.dart';
+import 'store_page.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({super.key});
@@ -21,6 +25,7 @@ class _MainMenuState extends State<MainMenu>
   int _selectedIndex = 0;
   bool _isSearching = false;
   String _profileImageUrl = "";
+  // bool _isProducer = AuthService().isProducer;
 
   late AnimationController _animationController;
   late Animation<double> _opacityAnimation;
@@ -93,8 +98,10 @@ class _MainMenuState extends State<MainMenu>
   @override
   Widget build(BuildContext context) {
     final List<Widget> _pages = [
-      ChatListPage(),
-      ConectionsPage(),
+      HomePage(),
+      SellsPage(),
+      SellPage(),
+      StorePage(),
       SettingsPage(),
     ];
 
@@ -148,18 +155,28 @@ class _MainMenuState extends State<MainMenu>
                         onPressed: _toggleSearch,
                       ),
             ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: InkWell(
-              onTap: () => _navigateToPage(AppRoutes.PROFILE_PAGE),
-              child:
-                  AuthService().currentUser != null
-                      ? CircleAvatar(
-                        backgroundImage: NetworkImage(_profileImageUrl),
-                      )
-                      : Container(),
+          IconButton(
+            onPressed:
+                () => Navigator.of(
+                  context,
+                ).pushNamed(AppRoutes.NOTIFICATION_PAGE),
+            icon: Badge.count(
+              count: 1,
+              child: Icon(Icons.notifications_none_rounded),
             ),
           ),
+          // Padding(
+          //   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          //   child: InkWell(
+          //     onTap: () => _navigateToPage(AppRoutes.PROFILE_PAGE),
+          //     child:
+          //         AuthService().currentUser != null
+          //             ? CircleAvatar(
+          //               backgroundImage: NetworkImage(_profileImageUrl),
+          //             )
+          //             : Container(),
+          //   ),
+          // ),
         ],
       ),
       floatingActionButton:
@@ -178,15 +195,24 @@ class _MainMenuState extends State<MainMenu>
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Theme.of(context).bottomAppBarTheme.color,
+        unselectedItemColor: Theme.of(context).colorScheme.secondaryFixed,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.chat), label: "Conversas"),
-          BottomNavigationBarItem(icon: Icon(Icons.group), label: "Conexões"),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Inicio"),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Definições",
+            icon: Icon(Icons.fax_rounded),
+            label: "Vendas",
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add_circle),
+            label: "Vender",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.precision_manufacturing_outlined),
+            label: "Banca",
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Gestão"),
         ],
       ),
     );

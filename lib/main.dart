@@ -18,10 +18,12 @@ import 'utils/app_routes.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'utils/theme_notifier.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting('pt_PT', null);
+  await Firebase.initializeApp();
 
   runApp(
     MultiProvider(
@@ -78,6 +80,7 @@ class MyApp extends StatelessWidget {
           secondary: Colors.white,
           secondaryFixed: const Color.fromARGB(255, 82, 82, 82),
           tertiary: const Color.fromRGBO(155, 202, 184, 1),
+          tertiaryFixed: Colors.black,
           inverseSurface: const Color.fromRGBO(91, 152, 134, 1),
           inversePrimary: const Color.fromRGBO(40, 87, 70, 1),
           seedColor: Colors.purple,

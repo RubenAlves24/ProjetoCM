@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1077460064172-hgr6579je0us026s9b3cag846b0eiv9h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pt.com.ms.harvestly",
+            "certificate_hash": "dd1c58baa1d7a78a2b3616bdfdb090e0e9049bdb"
+          }
+        },
+        {
           "client_id": "1077460064172-631f0fdijpbn6cuvh7n169va572gr9km.apps.googleusercontent.com",
           "client_type": 3
         }

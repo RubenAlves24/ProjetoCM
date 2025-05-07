@@ -7,7 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_core/firebase_core.dart';
-// import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 import '../chat/chat_list_notifier.dart';
 
@@ -220,15 +220,15 @@ class AuthFirebaseService implements AuthService {
         print('exception->$e');
       }
     else if (typeOfLogin == "Facebook") {
-      // // Trigger the sign-in flow
-      // final LoginResult loginResult = await FacebookAuth.instance.login();
+      // Trigger the sign-in flow
+      final LoginResult loginResult = await FacebookAuth.instance.login();
 
-      // // Create a credential from the access token
-      // final OAuthCredential facebookAuthCredential =
-      //     FacebookAuthProvider.credential(loginResult.accessToken!.token);
+      // Create a credential from the access token
+      final OAuthCredential facebookAuthCredential =
+          FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
 
-      // // Once signed in, return the UserCredential
-      // await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
+      // Once signed in, return the UserCredential
+      await FirebaseAuth.instance.signInWithCredential(facebookAuthCredential);
     }
     ChatListNotifier.instance.listenToChats();
   }

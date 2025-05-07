@@ -7,7 +7,6 @@ plugins {
 }
 
 android {
-    // namespace = "pt.com.ms.harvestly" - O problema esta aqui
     namespace = "pt.com.ms.harvestly"
     compileSdk = flutter.compileSdkVersion
     // ndkVersion = flutter.ndkVersion
