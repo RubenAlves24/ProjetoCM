@@ -83,6 +83,7 @@ class MyApp extends StatelessWidget {
           tertiaryFixed: Colors.black,
           inverseSurface: const Color.fromRGBO(91, 152, 134, 1),
           inversePrimary: const Color.fromRGBO(40, 87, 70, 1),
+          onInverseSurface: const Color.fromRGBO(232, 247, 238, 1),
           seedColor: Colors.purple,
         ),
         appBarTheme: const AppBarTheme(
@@ -91,6 +92,9 @@ class MyApp extends StatelessWidget {
           centerTitle: true,
         ),
         bottomAppBarTheme: const BottomAppBarTheme(color: Colors.white),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          foregroundColor: Colors.white,
+        ),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,

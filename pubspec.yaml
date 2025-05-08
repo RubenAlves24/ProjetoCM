@@ -123,6 +123,14 @@ flutter:
     - assets/images/appleIcon.png
     - assets/images/addProfileImage.png
     - assets/images/addGroupImage.png
+    - assets/images/next_steps.png
+    - assets/images/producer/irrigation.jpg
+    - assets/images/producer/soil_analysis.jpg
+    - assets/images/producer/yara_fertilizantes.jpg
+    - assets/images/producer/john_deere_tractor.jpg
+    - assets/images/producer/bayer_crop_protection.jpg
+    - assets/images/producer/fertileasy_logo.jpg
+    - assets/images/producer/agro_insurance.jpg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

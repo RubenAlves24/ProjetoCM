@@ -22,6 +22,9 @@ class _SettingsPageState extends State<SettingsPage> {
   String? _email;
   String? _phoneNumber;
   String? _recoveryEmail;
+  bool _isOrdersExpanded = false;
+  bool _isProductsExpanded = false;
+  bool _isAnalyticsExpanded = false;
 
   @override
   void initState() {
@@ -58,12 +61,38 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        toolbarHeight: MediaQuery.of(context).size.height * 0.1,
+        title: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text("Gestão", style: TextStyle(fontSize: 40)),
+              ),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "Visão geral da sua loja!",
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
+                ),
+              ),
+              SizedBox(height: 10),
+            ],
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Card(
+              elevation: 0,
+              color: Theme.of(context).colorScheme.onInverseSurface,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
@@ -72,24 +101,278 @@ class _SettingsPageState extends State<SettingsPage> {
                 child: Row(
                   children: [
                     Image.asset(
-                      "assets/images/logo_android2.png",
+                      "assets/images/next_steps.png",
                       height: 80,
                     ).animate().fade(duration: 800.ms).scale(),
                     SizedBox(width: 20),
-                    Column(
-                      children: [
-                        SizedBox(height: 10),
-                        Text("Harvestly", style: TextStyle(fontSize: 24)),
-                        Text("Versão 1.0.1", style: TextStyle(fontSize: 12)),
-                      ],
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: 10),
+                          Text(
+                            "Próximos passos",
+                            textAlign: TextAlign.start,
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.w600,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                          Text(
+                            "Siga estas etapas para começar a vender: \n• Adicionar um produto\n• Configurar os canais de venda\n• Destacar o seu anúncio",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Theme.of(context).colorScheme.primary,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
               ),
             ).animate().slide(duration: 500.ms),
-            SizedBox(height: 20),
+            SizedBox(height: 10),
+            SettingsTileGroup(
+              icon: Icons.home,
+              title: "Página Principal",
+              onTap: () {
+                // Navegar para página principal
+              },
+            ),
+            SettingsTileGroup(
+              icon: Icons.shopping_cart,
+              title: "Encomendas",
+              subOptions: [
+                SettingsSubOption(
+                  title: "Faturação",
+                  onTap: () {
+                    // Navegar para Faturação
+                  },
+                ),
+                SettingsSubOption(
+                  title: "Compras abandonadas",
+                  onTap: () {
+                    // Navegar para Compras Abandonadas
+                  },
+                ),
+              ],
+            ),
+            SettingsTileGroup(
+              icon: Icons.inventory,
+              title: "Produtos",
+              subOptions: [
+                SettingsSubOption(
+                  title: "Gestão de Stock",
+                  onTap: () {
+                    // Navegar para Gestão de Stock
+                  },
+                ),
+                SettingsSubOption(
+                  title: "Gestão de Preços",
+                  onTap: () {
+                    // Navegar para Gestão de Preços
+                  },
+                ),
+                SettingsSubOption(
+                  title: "Cabazes",
+                  onTap: () {
+                    // Navegar para Cabazes
+                  },
+                ),
+              ],
+            ),
+            SettingsTileGroup(
+              icon: Icons.people,
+              title: "Clientes",
+              onTap: () {
+                // Navegar para página principal
+              },
+            ),
+            SettingsTileGroup(
+              icon: Icons.analytics,
+              title: "Análise de Dados",
+              subOptions: [
+                SettingsSubOption(
+                  title: "Gestão de Stock",
+                  onTap: () {
+                    // Navegar para Gestão de Stock
+                  },
+                ),
+                SettingsSubOption(
+                  title: "Relatórios",
+                  onTap: () {
+                    // Navegar para Gestão de Preços
+                  },
+                ),
+                SettingsSubOption(
+                  title: "Por canal de venda",
+                  onTap: () {
+                    // Navegar para Cabazes
+                  },
+                ),
+                SettingsSubOption(
+                  title: "Principais produtores",
+                  onTap: () {
+                    // Navegar para Cabazes
+                  },
+                ),
+                SettingsSubOption(
+                  title: "Visitas à banca",
+                  onTap: () {
+                    // Navegar para Cabazes
+                  },
+                ),
+                SettingsSubOption(
+                  title: "Finanças",
+                  onTap: () {
+                    // Navegar para Cabazes
+                  },
+                ),
+              ],
+            ),
+            SettingsTileGroup(
+              icon: Icons.storefront,
+              title: "Canais de Venda",
+              onTap: () {
+                // Navegar para página principal
+              },
+            ),
+            SettingsTileGroup(
+              icon: Icons.campaign,
+              title: "Anúncios",
+              onTap: () {
+                // Navegar para página principal
+              },
+            ),
+            SettingsTileGroup(
+              icon: Icons.star,
+              title: "Destaques de Anúncios",
+              onTap: () {
+                // Navegar para página principal
+              },
+            ),
+            SettingsTileGroup(
+              icon: Icons.attach_money,
+              title: "Finanças",
+              onTap: () {
+                // Navegar para página principal
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-            Text("Conta"),
+class SettingsTileGroup extends StatefulWidget {
+  final IconData icon;
+  final String title;
+  final List<SettingsSubOption>? subOptions;
+  final VoidCallback? onTap;
+
+  const SettingsTileGroup({
+    super.key,
+    required this.icon,
+    required this.title,
+    this.subOptions,
+    this.onTap,
+  });
+
+  @override
+  State<SettingsTileGroup> createState() => _SettingsTileGroupState();
+}
+
+class _SettingsTileGroupState extends State<SettingsTileGroup> {
+  bool _isExpanded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final color = theme.colorScheme.inversePrimary;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ListTile(
+          leading: Icon(widget.icon, size: 50, color: color),
+          title: Text(
+            widget.title,
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 22,
+              color: color,
+            ),
+          ),
+          trailing:
+              widget.subOptions != null
+                  ? Icon(
+                    _isExpanded
+                        ? Icons.expand_less
+                        : Icons.keyboard_arrow_down_rounded,
+                    size: 35,
+                    color: color,
+                  )
+                  : Icon(Icons.arrow_forward_ios, color: color),
+          onTap: () {
+            if (widget.subOptions != null) {
+              setState(() {
+                _isExpanded = !_isExpanded;
+              });
+            } else {
+              widget.onTap?.call();
+            }
+          },
+        ),
+        if (widget.subOptions != null)
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 300),
+            height: _isExpanded ? (widget.subOptions!.length * 65.0) : 0,
+            curve: Curves.fastOutSlowIn,
+            child: SingleChildScrollView(
+              physics: const NeverScrollableScrollPhysics(),
+              child: Column(
+                children:
+                    widget.subOptions!
+                        .map(
+                          (sub) => ListTile(
+                            title: Text(
+                              sub.title,
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 20,
+                                color: color,
+                              ),
+                            ),
+                            trailing: Icon(
+                              Icons.arrow_forward_ios,
+                              color: color,
+                            ),
+                            onTap: sub.onTap,
+                          ),
+                        )
+                        .toList(),
+              ),
+            ),
+          ),
+        const SizedBox(height: 10),
+      ],
+    );
+  }
+}
+
+class SettingsSubOption {
+  final String title;
+  final VoidCallback onTap;
+
+  SettingsSubOption({required this.title, required this.onTap});
+}
+
+/*
+
+  Text("Conta"),
             Card(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
@@ -363,11 +646,6 @@ class _SettingsPageState extends State<SettingsPage> {
                 ],
               ),
             ).animate().slideX(duration: 600.ms),
-          ],
-        ),
-      ),
-    );
-  }
 
   void _editUserInfoField(
     BuildContext context,
@@ -461,5 +739,6 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
       );
     }
+    
   }
-}
+  */

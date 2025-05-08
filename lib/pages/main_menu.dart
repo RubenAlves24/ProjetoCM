@@ -3,8 +3,6 @@ import 'package:harvestly/pages/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../core/services/chat/chat_list_notifier.dart';
-import '../pages/chat_list_page.dart';
-import 'conections_page.dart';
 import '../pages/settings_page.dart';
 import '../core/services/auth/auth_service.dart';
 import '../utils/app_routes.dart';
@@ -12,6 +10,7 @@ import 'home_page.dart';
 import 'sell_page.dart';
 import 'sells_page.dart';
 import 'store_page.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MainMenu extends StatefulWidget {
   const MainMenu({super.key});
@@ -24,7 +23,7 @@ class _MainMenuState extends State<MainMenu>
     with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
   bool _isSearching = false;
-  String _profileImageUrl = "";
+  // String _profileImageUrl = "";
   // bool _isProducer = AuthService().isProducer;
 
   late AnimationController _animationController;
@@ -40,7 +39,7 @@ class _MainMenuState extends State<MainMenu>
   @override
   void initState() {
     super.initState();
-    _profileImageUrl = AuthService().currentUser?.imageUrl ?? "";
+    // _profileImageUrl = AuthService().currentUser?.imageUrl ?? "";
     _selectedIndex = 0;
 
     _animationController = AnimationController(
@@ -73,27 +72,27 @@ class _MainMenuState extends State<MainMenu>
     });
   }
 
-  void _navigateToPage(String route) {
-    Navigator.of(context).push(
-      PageRouteBuilder(
-        pageBuilder: (_, __, ___) => _getPage(route),
-        transitionsBuilder: (_, animation, __, child) {
-          return FadeTransition(opacity: animation, child: child);
-        },
-      ),
-    );
-  }
+  // void _navigateToPage(String route) {
+  //   Navigator.of(context).push(
+  //     PageRouteBuilder(
+  //       pageBuilder: (_, __, ___) => _getPage(route),
+  //       transitionsBuilder: (_, animation, __, child) {
+  //         return FadeTransition(opacity: animation, child: child);
+  //       },
+  //     ),
+  //   );
+  // }
 
-  Widget _getPage(String route) {
-    switch (route) {
-      case AppRoutes.PROFILE_PAGE:
-        return ProfilePage();
-      case AppRoutes.NEW_CHAT_PAGE:
-        return NewChatPage();
-      default:
-        return Container();
-    }
-  }
+  // Widget _getPage(String route) {
+  //   switch (route) {
+  //     case AppRoutes.PROFILE_PAGE:
+  //       return ProfilePage();
+  //     case AppRoutes.NEW_CHAT_PAGE:
+  //       return NewChatPage();
+  //     default:
+  //       return Container();
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -108,53 +107,56 @@ class _MainMenuState extends State<MainMenu>
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
+        //Image.asset(
+        //   "assets/images/logo_android2.png",
+        //   height: 80,
+        // )
         title: Text("Harvestly", style: TextStyle(fontFamily: "Barriecito")),
         actions: [
-          if (_selectedIndex == 0)
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 300),
-              transitionBuilder: (child, animation) {
-                return FadeTransition(opacity: animation, child: child);
-              },
-              child:
-                  _isSearching
-                      ? Padding(
-                        key: const ValueKey(1),
-                        padding: const EdgeInsets.all(8),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          child: SearchBar(
-                            autoFocus: true,
-                            hintText: "Procurar...",
-                            onChanged: (query) {
-                              Provider.of<ChatListNotifier>(
-                                context,
-                                listen: false,
-                              ).setSearchQuery(query);
-                            },
-                            trailing: [
-                              IconButton(
-                                onPressed: () {
-                                  setState(() {
-                                    _isSearching = false;
-                                  });
-                                  Provider.of<ChatListNotifier>(
-                                    context,
-                                    listen: false,
-                                  ).setSearchQuery("");
-                                },
-                                icon: Icon(Icons.close, color: Colors.grey),
-                              ),
-                            ],
-                          ),
+          AnimatedSwitcher(
+            duration: const Duration(milliseconds: 300),
+            transitionBuilder: (child, animation) {
+              return FadeTransition(opacity: animation, child: child);
+            },
+            child:
+                _isSearching
+                    ? Padding(
+                      key: const ValueKey(1),
+                      padding: const EdgeInsets.all(8),
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        child: SearchBar(
+                          autoFocus: true,
+                          hintText: "Procurar...",
+                          onChanged: (query) {
+                            Provider.of<ChatListNotifier>(
+                              context,
+                              listen: false,
+                            ).setSearchQuery(query);
+                          },
+                          trailing: [
+                            IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  _isSearching = false;
+                                });
+                                Provider.of<ChatListNotifier>(
+                                  context,
+                                  listen: false,
+                                ).setSearchQuery("");
+                              },
+                              icon: Icon(Icons.close, color: Colors.grey),
+                            ),
+                          ],
                         ),
-                      )
-                      : IconButton(
-                        key: const ValueKey(2),
-                        icon: const Icon(Icons.search),
-                        onPressed: _toggleSearch,
                       ),
-            ),
+                    )
+                    : IconButton(
+                      key: const ValueKey(2),
+                      icon: const Icon(Icons.search),
+                      onPressed: _toggleSearch,
+                    ),
+          ),
           IconButton(
             onPressed:
                 () => Navigator.of(
@@ -179,16 +181,16 @@ class _MainMenuState extends State<MainMenu>
           // ),
         ],
       ),
-      floatingActionButton:
-          _selectedIndex == 0
-              ? FloatingActionButton(
-                backgroundColor: Theme.of(context).colorScheme.surface,
-                foregroundColor:
-                    Theme.of(context).floatingActionButtonTheme.foregroundColor,
-                onPressed: () => _navigateToPage(AppRoutes.NEW_CHAT_PAGE),
-                child: const Icon(Icons.add),
-              )
-              : null,
+      // floatingActionButton:
+      //     _selectedIndex == 0
+      //         ? FloatingActionButton(
+      //           backgroundColor: Theme.of(context).colorScheme.surface,
+      //           foregroundColor:
+      //               Theme.of(context).floatingActionButtonTheme.foregroundColor,
+      //           onPressed: () => _navigateToPage(AppRoutes.NEW_CHAT_PAGE),
+      //           child: const Icon(Icons.add),
+      //         )
+      //         : null,
       body: FadeTransition(
         opacity: _opacityAnimation,
         child: _pages[_selectedIndex],
@@ -201,7 +203,7 @@ class _MainMenuState extends State<MainMenu>
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Inicio"),
           BottomNavigationBarItem(
-            icon: Icon(Icons.fax_rounded),
+            icon: Icon(FontAwesomeIcons.fileInvoiceDollar),
             label: "Vendas",
           ),
           BottomNavigationBarItem(
@@ -209,10 +211,13 @@ class _MainMenuState extends State<MainMenu>
             label: "Vender",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.precision_manufacturing_outlined),
+            icon: Icon(FontAwesomeIcons.buildingUser),
             label: "Banca",
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Gestão"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.manage_accounts),
+            label: "Gestão",
+          ),
         ],
       ),
     );
